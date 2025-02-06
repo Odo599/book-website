@@ -4,13 +4,14 @@ async function getRecommendations() {
     const url = `https://book-api-kknn.onrender.com/recommend?books=${encodeURIComponent(book)}&access_key=${apiKey}`;
 
     try {
+        const recommendationsList = document.getElementById("recommendations");
+        recommendationsList.innerHTML = "<li>Loading...</li>";
+
         const response = await fetch(url);
         const data = await response.json();
 
-        const recommendationsList = document.getElementById("recommendations");
-        recommendationsList.innerHTML = ""; // Clear previous results
-
         if (data.recommendations) {
+            recommendationsList.innerHTML = "";
             data.recommendations.forEach(title => {
                 const li = document.createElement("li");
                 li.textContent = title;

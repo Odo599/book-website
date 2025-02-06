@@ -8,8 +8,10 @@
 </head>
 <body>
     <h1>Book Recommendation System</h1>
-    <input type="text" id="bookInput" placeholder="Enter a book name">
-    <button onclick="getRecommendations()">Get Recommendations</button>
+    <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+        <textarea id="bookInput" placeholder="Enter a book name"></textarea>
+        <button onclick="getRecommendations()">Get Recommendations</button>
+    </div>
     <ul id="recommendations"></ul>
 
     <script src="script.js"></script>
