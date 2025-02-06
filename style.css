@@ -1,12 +1,17 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background-color: #f4f4f4;
+    background-color: #aeaeae;
 }
 
 textarea, button {
     padding: 10px;
     margin: 10px;
+    background-color: #dedede;
+}
+
+button {
+    border-width: 0.2cap;
 }
 
 textarea {
