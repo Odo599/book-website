@@ -23,3 +23,8 @@ ul {
     list-style-type: none;
     padding: 0;
 }
+
+.addfieldbutton {
+    width: 40px;
+    height: 40px;
+}
