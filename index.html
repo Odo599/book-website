@@ -8,20 +8,21 @@
 </head>
 <body>
     <h1>Book Recommendations</h1>
-
+    
     <div id="input_div" class="input_div"></div>
-    <!-- <div style="display:flex; flex-direction: row; justify-content: center; align-items: center"> -->
-        
-        <button onclick="getRecommendations()">Get Recommendations</button>
-    </div>
 
-    <button onclick="addField()" class="addfieldbutton">
+    <button onclick="getRecommendations()" class="text-button">
+        Get Recommendations
+    </button>
+
+    <button onclick="addField()" class="text-button">
         <b>+</b>
     </button>
 
     <ul id="recommendations"></ul>
 
-</body>
     <script src="script.js"></script>
     <script>addField()</script>
+
+</body>
 </html>

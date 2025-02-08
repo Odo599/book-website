@@ -1,5 +1,5 @@
-var boxes_list = []
-var boxes_created = -1
+var inputboxes_list = []
+var inputboxes_created = -1
 
 async function getRecommendations() {
     console.log("Fetching recommendations")
@@ -18,6 +18,7 @@ async function getRecommendations() {
         const data = await response.json();
 
         if (data.recommendations) {
+            console.log("Recommendations found:", data.recommendations);
             recommendationsList.innerHTML = "";
             data.recommendations.forEach(title => {
                 const li = document.createElement("li");
@@ -37,8 +38,8 @@ async function getRecommendations() {
 function getBooks() {
     try {
         var output = ""
-        boxes_list.forEach( box => {
-            input_elem = box.children[0]
+        inputboxes_list.forEach( inputbox => {
+            input_elem = inputbox.children[0]
             output += input_elem.value + "\n"
         })
         return(output)
@@ -50,27 +51,27 @@ function getBooks() {
 function addField() {
     const input_div = document.getElementById("input_div");
 
-    boxes_created ++
+    inputboxes_created ++
 
     new_input = getNewInput()
 
     input_div.appendChild(new_input);
 
-    boxes_list.push(new_input);
+    inputboxes_list.push(new_input);
 
 }
 
-function removeBox(id) {
-    const box = boxes_list[id]
-    if (box != undefined) {
-        dead_id = box.id
-        box.remove()
-        boxes_list.splice(id, 1)
-        boxes_created --
-        boxes_list.forEach( box => {
-            if (box.id) {
-                if (box.id > dead_id) {
-                    box.id --
+function removeinputbox(id) {
+    const inputbox = inputboxes_list[id]
+    if (inputbox != undefined) {
+        dead_id = inputbox.id
+        inputbox.remove()
+        inputboxes_list.splice(id, 1)
+        inputboxes_created --
+        inputboxes_list.forEach( inputbox => {
+            if (inputbox.id) {
+                if (inputbox.id > dead_id) {
+                    inputbox.id --
                 }
             }
         })
@@ -78,19 +79,30 @@ function removeBox(id) {
 }
 
 function getNewInput() {
-    const div = document.createElement("div")
-    const box = document.createElement("input")
-    const button = document.createElement("button")
+    const container = document.createElement("div") // Container for inputbox and button
+    const inputbox = document.createElement("input") // Input box
+    const button = document.createElement("button") // Button to remove inputbox
+    const button_img = document.createElement("img") // Image for button
 
-    div.id = boxes_created
-    button.innerHTML = "X"
-    button.onclick = () => removeBox(div.id)
+    // Input Box Setup
+    inputbox.type = "text"
+    inputbox.placeholder = "Enter a book title"
 
-    box.className = "bookinput box"
-    button.className = "bookinput button"
+    // Button Image Setup
+    button_img.src = "images/cross-icon.svg"
+    button_img.alt = "X"
+    button_img.className = "icon"
 
-    div.appendChild(box)
-    div.appendChild(button)
+    // Button Setup
+    button.appendChild(button_img)
+    button.onclick = () => removeinputbox(container.id)
 
-    return(div)
+    
+    // Container Setup
+    container.id = inputboxes_created
+    container.className = "inputcontainer"
+    container.appendChild(inputbox)
+    container.appendChild(button)
+
+    return(container)
 }
