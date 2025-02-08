@@ -3,12 +3,15 @@ var boxes_created = -1
 
 async function getRecommendations() {
     console.log("Fetching recommendations")
+
+    const recommendationsList = document.getElementById("recommendations");
+    recommendationsList.inertHTML = "";
+    recommendationsList.appendChild(document.createElement("li")).textContent = "Loading...";
+
     const book = getBooks()
     const apiKey = "sdpgiuhjs;nfgbhvgtcr6v7hubvcft7d5x646vgb7tsdpgiuhjs;nfgbhvgtcr6v7hubvcft7d5x646vgb7tsdpgiuhjs;nfgbhvgtcr6v7hubvcft7d5x646vgb7tsdpgiuhjs;nfgbhvgtcr6v7hubvcft7d5x646vgb7tfupihgpsjfnghosfhguidfjs";
     const url = `https://book-api-kknn.onrender.com/recommend?books=${encodeURIComponent(book)}&access_key=${apiKey}`;
     
-    const recommendationsList = document.getElementById("recommendations");
-    recommendationsList.inertHTML = "<li>Loading...</li>";
 
     try {
         const response = await fetch(url);
@@ -22,6 +25,7 @@ async function getRecommendations() {
                 recommendationsList.appendChild(li);
             });
         } else {
+            console.error("No recommendations found.");
             recommendationsList.innerHTML = "<li>No recommendations found.</li>";
         }
     } catch (error) {
