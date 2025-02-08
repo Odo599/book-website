@@ -8,6 +8,7 @@ async function getRecommendations() {
     const url = `https://book-api-kknn.onrender.com/recommend?books=${encodeURIComponent(book)}&access_key=${apiKey}`;
     
     const recommendationsList = document.getElementById("recommendations");
+    recommendationsList.inertHTML = "<li>Loading...</li>";
 
     try {
         const response = await fetch(url);
@@ -80,6 +81,9 @@ function getNewInput() {
     div.id = boxes_created
     button.innerHTML = "X"
     button.onclick = () => removeBox(div.id)
+
+    box.className = "bookinput box"
+    button.className = "bookinput button"
 
     div.appendChild(box)
     div.appendChild(button)

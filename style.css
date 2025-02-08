@@ -28,3 +28,26 @@ ul {
     width: 40px;
     height: 40px;
 }
+
+.bookinput {
+    margin: 0px;
+}
+
+.box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border: #303030 1px solid;
+    border-right: 0px;
+    padding: 10px;
+    background-color: #f9f9f9;
+}
+
+.button {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    border: #303030 1px solid;
+    border-left: 0px;
+    background-color: #f9f9f9;
+}
