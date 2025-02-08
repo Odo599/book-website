@@ -8,12 +8,19 @@
 </head>
 <body>
     <h1>Book Recommendations</h1>
+    
     <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
-        <textarea id="bookInput" placeholder="Enter a book name"></textarea>
+        <div id="input_div" class="input_div"></div>
         <button onclick="getRecommendations()">Get Recommendations</button>
     </div>
+
+    <button onclick="addField()" class="addfieldbutton">
+        <b>+</b>
+    </button>
+
     <ul id="recommendations"></ul>
 
     <script src="script.js"></script>
+    <script>addField()</script>
 </body>
 </html>
