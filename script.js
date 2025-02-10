@@ -4,9 +4,7 @@ var inputboxes_created = -1
 async function getRecommendations() {
     console.log("Fetching recommendations")
 
-    const recommendationsList = document.getElementById("recommendations");
-    recommendationsList.inertHTML = "";
-    recommendationsList.appendChild(document.createElement("li")).textContent = "Loading...";
+    setOutputToText("Loading recommendations...")
 
     const book = getBooks()
     const apiKey = "sdpgiuhjs;nfgbhvgtcr6v7hubvcft7d5x646vgb7tsdpgiuhjs;nfgbhvgtcr6v7hubvcft7d5x646vgb7tsdpgiuhjs;nfgbhvgtcr6v7hubvcft7d5x646vgb7tsdpgiuhjs;nfgbhvgtcr6v7hubvcft7d5x646vgb7tfupihgpsjfnghosfhguidfjs";
@@ -19,20 +17,37 @@ async function getRecommendations() {
 
         if (data.recommendations) {
             console.log("Recommendations found:", data.recommendations);
-            recommendationsList.innerHTML = "";
-            data.recommendations.forEach(title => {
-                const li = document.createElement("li");
-                li.textContent = title;
-                recommendationsList.appendChild(li);
-            });
+            if (data.recommendations == "Error: Could not generate recommendations") {
+                setOutputToText("Error fetching recommendations.");
+            } else {
+                setOutputToList(data.recommendations);
+            }
         } else {
             console.error("No recommendations found.");
-            recommendationsList.innerHTML = "<li>No recommendations found.</li>";
+            setOutputToText("No recommendations found.");
         }
     } catch (error) {
         console.error("Error fetching recommendations:", error);
-        recommendationsList.innerHTML = "<li>There was an error while loading the recommendations.\nPlease try again."
+        setOutputToText("Error fetching recommendations.");
     }
+}
+
+function setOutputToList (output) {
+    const recommendationsList = document.getElementById("recommendations");
+
+    recommendationsList.innerHTML = "";
+    output.forEach(title => {
+        const div = document.createElement("div");
+        div.textContent = title;
+        div.className = "card"
+        recommendationsList.appendChild(div);
+    });
+}
+
+function setOutputToText (output) {
+    const recommendationsList = document.getElementById("recommendations");
+    recommendationsList.textContent  = "";
+    recommendationsList.appendChild(document.createElement("p")).textContent = output;
 }
 
 function getBooks() {

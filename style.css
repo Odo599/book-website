@@ -64,3 +64,20 @@ ul {
     font-size: 16px;
     border-radius: 7px;
 }
+
+.card {
+    display: flex;
+    border: 1px solid #ddd;
+    padding: 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-inline: 40px;
+    margin-block: 12px;
+}
+
+.container {
+    flex-wrap: wrap;
+    row-gap: 10px;
+    align-items: center;
+    margin-inline: auto;
+}
