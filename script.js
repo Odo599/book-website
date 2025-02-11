@@ -2,6 +2,7 @@ var inputboxes_list = []
 var inputboxes_created = -1
 
 async function getRecommendations() {
+    cleanUserInputs()
     console.log("Fetching recommendations")
 
     setOutputToText("Loading recommendations...")
@@ -64,6 +65,8 @@ function getBooks() {
 }
 
 function addField() {
+    cleanUserInputs()
+
     const input_div = document.getElementById("input_div");
 
     inputboxes_created ++
@@ -75,7 +78,6 @@ function addField() {
     inputboxes_list.push(new_input);
 
     updateCheckboxes()
-
 }
 
 function removeinputbox(id) {
@@ -103,7 +105,7 @@ function getNewInput() {
     const button_img = document.createElement("img") // Image for button
 
     // Input Box Setup
-    inputbox.type = "text"
+    inputbox.name = "text"
     inputbox.placeholder = "Enter a book title"
 
     // Button Image Setup
@@ -127,7 +129,7 @@ function getNewInput() {
 }
 
 function disableRemoveButton() {
-    console.log("Disabling remove button")
+    console.debug("Disabling remove button")
     inputboxes_list.forEach( inputbox => {
         inputbox.children[1].className = "hidden"
         inputbox.children[1].disabled = true
@@ -135,7 +137,7 @@ function disableRemoveButton() {
 }
 
 function enableRemoveButton() {
-    console.log("Enabling remove button")
+    console.debug("Enabling remove button")
     inputboxes_list.forEach( inputbox => {
         inputbox.children[1].className = "button"
         inputbox.children[1].disabled = false
@@ -148,4 +150,12 @@ function updateCheckboxes() {
     } else {
         enableRemoveButton()
     }
+}
+
+function cleanUserInputs() {
+    inputboxes_list.forEach( inputbox => {
+        if (inputbox.children[0].value == "") {
+            removeinputbox(inputbox.id)
+        }
+    })
 }
