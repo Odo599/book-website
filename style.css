@@ -33,12 +33,12 @@ ul {
     padding: 8px;
     font-size: 16px;
     border: none;
-    border-radius: 5px 0 0 5px;
+    border-radius: 5px;
     flex: 1;
 }
 
 
-.inputcontainer button {
+.inputcontainer .button {
     margin: 0px;
     height: 34px;
     padding: 8px;
@@ -80,4 +80,9 @@ ul {
     row-gap: 10px;
     align-items: center;
     margin-inline: auto;
+}
+
+.hidden {
+    display: none;
+    border-radius: 0 5px 5px 0;
 }

@@ -74,6 +74,8 @@ function addField() {
 
     inputboxes_list.push(new_input);
 
+    updateCheckboxes()
+
 }
 
 function removeinputbox(id) {
@@ -90,6 +92,7 @@ function removeinputbox(id) {
                 }
             }
         })
+        updateCheckboxes()
     }
 }
 
@@ -110,6 +113,7 @@ function getNewInput() {
 
     // Button Setup
     button.appendChild(button_img)
+    button.className = "button"
     button.onclick = () => removeinputbox(container.id)
 
     
@@ -120,4 +124,28 @@ function getNewInput() {
     container.appendChild(button)
 
     return(container)
+}
+
+function disableRemoveButton() {
+    console.log("Disabling remove button")
+    inputboxes_list.forEach( inputbox => {
+        inputbox.children[1].className = "hidden"
+        inputbox.children[1].disabled = true
+    })
+}
+
+function enableRemoveButton() {
+    console.log("Enabling remove button")
+    inputboxes_list.forEach( inputbox => {
+        inputbox.children[1].className = "button"
+        inputbox.children[1].disabled = false
+    })
+}
+
+function updateCheckboxes() {
+    if (inputboxes_created == 0) {
+        disableRemoveButton()
+    } else {
+        enableRemoveButton()
+    }
 }
