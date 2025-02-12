@@ -1,6 +1,7 @@
 var inputboxes_list = []
 var inputboxes_created = -1
 
+/* Ran when get recommendations button is clicked */
 async function getRecommendations() {
     cleanUserInputs()
     
@@ -43,6 +44,7 @@ async function getRecommendations() {
     }
 }
 
+/* Sets the output to a list of text */
 function setOutputToList (output) {
     const recommendationsList = document.getElementById("recommendations");
 
@@ -55,12 +57,14 @@ function setOutputToList (output) {
     });
 }
 
+/* Sets the output to a single text */
 function setOutputToText (output) {
     const recommendationsList = document.getElementById("recommendations");
     recommendationsList.textContent  = "";
     recommendationsList.appendChild(document.createElement("p")).textContent = output;
 }
 
+/* Gets the user input */
 function getBooks() {
     try {
         var output = ""
@@ -74,6 +78,7 @@ function getBooks() {
     }
 }
 
+/* Adds a new input field */
 function addField() {
     cleanUserInputs()
 
@@ -90,6 +95,7 @@ function addField() {
     updateCheckboxes()
 }
 
+/* Removes an input field */
 function removeinputbox(id) {
     const inputbox = inputboxes_list[id]
     if (inputbox != undefined) {
@@ -108,6 +114,7 @@ function removeinputbox(id) {
     }
 }
 
+/* Gets node for a new input field */
 function getNewInput() {
     const container = document.createElement("div") // Container for inputbox and button
     const inputbox = document.createElement("input") // Input box
@@ -138,6 +145,7 @@ function getNewInput() {
     return(container)
 }
 
+/* Disables the remove button */
 function disableRemoveButton() {
     console.debug("Disabling remove button")
     inputboxes_list.forEach( inputbox => {
@@ -146,6 +154,7 @@ function disableRemoveButton() {
     })
 }
 
+/* Enables the remove button */
 function enableRemoveButton() {
     console.debug("Enabling remove button")
     inputboxes_list.forEach( inputbox => {
@@ -154,6 +163,7 @@ function enableRemoveButton() {
     })
 }
 
+/* Updates the remove buttons */
 function updateCheckboxes() {
     if (inputboxes_created == 0) {
         disableRemoveButton()
@@ -162,6 +172,7 @@ function updateCheckboxes() {
     }
 }
 
+/* Removes unnecessary input fields */
 function cleanUserInputs() {
     if (inputboxes_list.length > 1) {
         inputboxes_list.forEach( inputbox => {
@@ -172,6 +183,7 @@ function cleanUserInputs() {
     }  
 }
 
+/* Checks if any input exists */
 function checkForInputExistence() {
     var input_exists = false
     inputboxes_list.forEach( inputbox => {
