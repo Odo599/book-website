@@ -3,6 +3,16 @@ var inputboxes_created = -1
 
 async function getRecommendations() {
     cleanUserInputs()
+    
+    var input_exists = checkForInputExistence()
+    if (!input_exists) {
+        console.log("No input detected")
+        setOutputToText("Please enter a book title.")
+        addField()
+        cleanUserInputs()
+        return
+    }
+
     console.log("Fetching recommendations")
 
     setOutputToText("Loading recommendations...")
@@ -153,9 +163,21 @@ function updateCheckboxes() {
 }
 
 function cleanUserInputs() {
+    if (inputboxes_list.length > 1) {
+        inputboxes_list.forEach( inputbox => {
+            if (inputbox.children[0].value == "") {
+                removeinputbox(inputbox.id)
+            }
+        })
+    }  
+}
+
+function checkForInputExistence() {
+    var input_exists = false
     inputboxes_list.forEach( inputbox => {
-        if (inputbox.children[0].value == "") {
-            removeinputbox(inputbox.id)
+        if (inputbox.children[0].value != "") {
+            input_exists = true
         }
     })
+    return input_exists
 }
