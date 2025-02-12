@@ -1,5 +1,11 @@
-var inputboxes_list = []
-var inputboxes_created = -1
+const input_boxes = {}
+
+function init() {
+    input_boxes.inputboxes_list = []
+    input_boxes.inputboxes_created = -1
+
+    addField(true)
+}
 
 /* Ran when get recommendations button is clicked */
 async function getRecommendations() {
@@ -68,7 +74,7 @@ function setOutputToText (output) {
 function getBooks() {
     try {
         var output = ""
-        inputboxes_list.forEach( inputbox => {
+        input_boxes.inputboxes_list.forEach( inputbox => {
             input_elem = inputbox.children[0]
             output += input_elem.value + "\n"
         })
@@ -79,31 +85,33 @@ function getBooks() {
 }
 
 /* Adds a new input field */
-function addField() {
-    cleanUserInputs()
+function addField(override = false) {
+    if (checkForInputExistence() || override) {
+        cleanUserInputs()
 
-    const input_div = document.getElementById("input_div");
+        const input_div = document.getElementById("input_div");
 
-    inputboxes_created ++
+        input_boxes.inputboxes_created ++
 
-    new_input = getNewInput()
+        new_input = getNewInput()
 
-    input_div.appendChild(new_input);
+        input_div.appendChild(new_input);
 
-    inputboxes_list.push(new_input);
+        input_boxes.inputboxes_list.push(new_input);
 
-    updateCheckboxes()
+        updateCheckboxes()
+    }
 }
 
 /* Removes an input field */
 function removeinputbox(id) {
-    const inputbox = inputboxes_list[id]
+    const inputbox = input_boxes.inputboxes_list[id]
     if (inputbox != undefined) {
         dead_id = inputbox.id
         inputbox.remove()
-        inputboxes_list.splice(id, 1)
-        inputboxes_created --
-        inputboxes_list.forEach( inputbox => {
+        input_boxes.inputboxes_list.splice(id, 1)
+        input_boxes.inputboxes_created --
+        input_boxes.inputboxes_list.forEach( inputbox => {
             if (inputbox.id) {
                 if (inputbox.id > dead_id) {
                     inputbox.id --
@@ -137,7 +145,7 @@ function getNewInput() {
 
     
     // Container Setup
-    container.id = inputboxes_created
+    container.id = input_boxes.inputboxes_created
     container.className = "inputcontainer"
     container.appendChild(inputbox)
     container.appendChild(button)
@@ -147,8 +155,7 @@ function getNewInput() {
 
 /* Disables the remove button */
 function disableRemoveButton() {
-    console.debug("Disabling remove button")
-    inputboxes_list.forEach( inputbox => {
+    input_boxes.inputboxes_list.forEach( inputbox => {
         inputbox.children[1].className = "hidden"
         inputbox.children[1].disabled = true
     })
@@ -156,8 +163,7 @@ function disableRemoveButton() {
 
 /* Enables the remove button */
 function enableRemoveButton() {
-    console.debug("Enabling remove button")
-    inputboxes_list.forEach( inputbox => {
+    input_boxes.inputboxes_list.forEach( inputbox => {
         inputbox.children[1].className = "button"
         inputbox.children[1].disabled = false
     })
@@ -165,7 +171,7 @@ function enableRemoveButton() {
 
 /* Updates the remove buttons */
 function updateCheckboxes() {
-    if (inputboxes_created == 0) {
+    if (input_boxes.inputboxes_created == 0) {
         disableRemoveButton()
     } else {
         enableRemoveButton()
@@ -174,8 +180,8 @@ function updateCheckboxes() {
 
 /* Removes unnecessary input fields */
 function cleanUserInputs() {
-    if (inputboxes_list.length > 1) {
-        inputboxes_list.forEach( inputbox => {
+    if (input_boxes.inputboxes_list.length > 1) {
+        input_boxes.inputboxes_list.forEach( inputbox => {
             if (inputbox.children[0].value == "") {
                 removeinputbox(inputbox.id)
             }
@@ -186,7 +192,7 @@ function cleanUserInputs() {
 /* Checks if any input exists */
 function checkForInputExistence() {
     var input_exists = false
-    inputboxes_list.forEach( inputbox => {
+    input_boxes.inputboxes_list.forEach( inputbox => {
         if (inputbox.children[0].value != "") {
             input_exists = true
         }
