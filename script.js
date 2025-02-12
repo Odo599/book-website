@@ -4,7 +4,7 @@ function init() {
     input_boxes.inputboxes_list = []
     input_boxes.inputboxes_created = -1
 
-    addField(true)
+    addField(true, false)
 }
 
 /* Ran when get recommendations button is clicked */
@@ -85,7 +85,7 @@ function getBooks() {
 }
 
 /* Adds a new input field */
-function addField(override = false) {
+function addField(override = false, fadein = true) {
     if ((checkForInputExistence() && !checkForBlankFields()) || override) {
         cleanUserInputs()
 
@@ -94,7 +94,9 @@ function addField(override = false) {
         input_boxes.inputboxes_created ++
 
         new_input = getNewInput()
-        new_input.className += " fade-in"
+        if (fadein) {
+            new_input.className += " fade-in"
+        }
         new_input.addEventListener("animationend", () => new_input.classList.remove("fade-in"))
 
         input_div.appendChild(new_input);
