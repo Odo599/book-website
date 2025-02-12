@@ -23,6 +23,7 @@ input, button {
     margin-bottom: 10px;
     border: 2px solid #777;
     border-radius: 5px;
+    background-color: #fff;
 }
 
 /* User Input Styling */
@@ -32,6 +33,7 @@ input, button {
     padding: 8px;
     font-size: 16px;
     border: none;
+    background-color: #fff0;
     border-radius: 5px;
     flex: 1;
 }
@@ -42,7 +44,7 @@ input, button {
     height: 34px;
     padding: 8px;
     border: 0px;
-    background: #fff;
+    background: #7770;
     cursor: pointer;
     border-radius: 0 5px 5px 0;
     display: flex;
