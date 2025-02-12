@@ -103,7 +103,7 @@ function addField(override = false, fadein = true) {
 
         input_boxes.inputboxes_list.push(new_input);
 
-        updateCheckboxes()
+        updateCheckboxes(fadein)
     }
 }
 
@@ -165,25 +165,34 @@ function getNewInput() {
 }
 
 /* Disables the remove button */
-function disableRemoveButton() {
+function disableRemoveButton(fadeout = true) {
     input_boxes.inputboxes_list.forEach( inputbox => {
-        inputbox.children[1].className = "hidden"
+        if (fadeout) {
+            inputbox.children[1].className = "fade-out button"
+            inputbox.children[1].addEventListener("animationend", () => inputbox.children[1].className = "hidden")
+        } else {
+            inputbox.children[1].className = "hidden"
+        }
+        
         inputbox.children[1].disabled = true
+        
     })
 }
 
 /* Enables the remove button */
 function enableRemoveButton() {
     input_boxes.inputboxes_list.forEach( inputbox => {
-        inputbox.children[1].className = "button"
-        inputbox.children[1].disabled = false
+        if (inputbox.children[1].disabled) {
+            inputbox.children[1].className = "button fade-in"
+            inputbox.children[1].disabled = false
+        }
     })
 }
 
 /* Updates the remove buttons */
-function updateCheckboxes() {
+function updateCheckboxes(fade = true) {
     if (input_boxes.inputboxes_created == 0) {
-        disableRemoveButton()
+        disableRemoveButton(fade)
     } else {
         enableRemoveButton()
     }

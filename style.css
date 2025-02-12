@@ -100,6 +100,7 @@ input, button {
 
 .fade-in {
     animation: fadeIn 1s;
+    animation-fill-mode: forwards;
 }
 
 @keyframes fadeOut {
