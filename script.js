@@ -86,7 +86,7 @@ function getBooks() {
 
 /* Adds a new input field */
 function addField(override = false) {
-    if (checkForInputExistence() || override) {
+    if ((checkForInputExistence() && !checkForBlankFields()) || override) {
         cleanUserInputs()
 
         const input_div = document.getElementById("input_div");
@@ -94,6 +94,8 @@ function addField(override = false) {
         input_boxes.inputboxes_created ++
 
         new_input = getNewInput()
+        new_input.className += " fade-in"
+        new_input.addEventListener("animationend", () => new_input.classList.remove("fade-in"))
 
         input_div.appendChild(new_input);
 
@@ -205,4 +207,15 @@ function checkForInputExistence() {
         }
     })
     return input_exists
+}
+
+/* Check if there are blank fields */
+function checkForBlankFields() {
+    var blank_exists = false
+    input_boxes.inputboxes_list.forEach( inputbox => {
+        if (inputbox.children[0].value == "") {
+            blank_exists = true
+        }
+    })
+    return blank_exists
 }
