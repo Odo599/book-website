@@ -103,8 +103,7 @@ function addField(override = false) {
     }
 }
 
-/* Removes an input field */
-function removeinputbox(id) {
+function deleteInputBox(id) {
     const inputbox = input_boxes.inputboxes_list[id]
     if (inputbox != undefined) {
         dead_id = inputbox.id
@@ -120,6 +119,14 @@ function removeinputbox(id) {
         })
         updateCheckboxes()
     }
+}
+
+/* Starts input field removal */
+function removeinputbox(id) {
+    const inputbox = input_boxes.inputboxes_list[id]
+
+    inputbox.className += " fade-out"
+    inputbox.addEventListener("animationend", () => deleteInputBox(id))
 }
 
 /* Gets node for a new input field */

@@ -92,3 +92,30 @@ input, button {
     display: none;
     border-radius: 0 5px 5px 0;
 }
+
+.fade-out {
+    animation: fadeOut 200ms;
+    animation-fill-mode: forwards;
+}
+
+.fade-in {
+    animation: fadeIn 1s;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
