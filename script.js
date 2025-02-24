@@ -76,7 +76,7 @@ function getBooks() {
         var output = ""
         input_boxes.inputboxes_list.forEach( inputbox => {
             input_elem = inputbox.children[0]
-            output += input_elem.value + "\n"
+            output += input_elem.value + ","
         })
         return(output)
     } catch (error) {
