@@ -25,8 +25,7 @@ async function getRecommendations() {
     setOutputToText("Loading recommendations...")
 
     const book = getBooks()
-    const apiKey = "vaiDxoVnkqgA2aCfjScmhTZDpecc2uZnbwQFURSdVJfeccueEJYdyAxgOSc2KApSBnqEDawyNPQrzHdUOUGYuG2iNRqSnY9cnXV0O0mKJDxcRmRcAwHcONHPr0PQfDUW";
-    const url = `https://swift-joline-book-recommendations-d151df8c.koyeb.app/recommend?books=${encodeURIComponent(book)}&access_key=${apiKey}`;
+    const url = `https://swift-joline-book-recommendations-d151df8c.koyeb.app/recommend?books=${encodeURIComponent(book)}`;
     
 
     try {
